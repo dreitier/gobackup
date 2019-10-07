@@ -19,3 +19,5 @@ dist/
 vendor/
 log/
 go.sum
+
+.idea
