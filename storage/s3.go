@@ -47,6 +47,10 @@ func (ctx *S3) open() (err error) {
 	ctx.bucket = ctx.viper.GetString("bucket")
 	ctx.path = ctx.viper.GetString("path")
 
+	if ctx.viper.GetBool("force_path_style") {
+		cfg.S3ForcePathStyle = aws.Bool(true)
+	}
+
 	sess := session.Must(session.NewSession(cfg))
 	ctx.client = s3manager.NewUploader(sess)
 
