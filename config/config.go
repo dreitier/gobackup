@@ -2,12 +2,11 @@ package config
 
 import (
 	"fmt"
+	"github.com/huacnlee/gobackup/logger"
+	"github.com/spf13/viper"
 	"os"
 	"path"
 	"time"
-
-	"github.com/huacnlee/gobackup/logger"
-	"github.com/spf13/viper"
 )
 
 var (
@@ -51,7 +50,6 @@ func init() {
 
 	IsTest = os.Getenv("GO_ENV") == "test"
 	HomeDir = os.Getenv("HOME")
-	TempPath = path.Join(os.TempDir(), "gobackup", fmt.Sprintf("%d", time.Now().UnixNano()))
 
 	if IsTest {
 		viper.SetConfigName("gobackup_test")
@@ -75,6 +73,10 @@ func init() {
 		logger.Error("Load gobackup config faild", err)
 		return
 	}
+
+	// override work dir via 'workdir' parameter in config file
+	viper.SetDefault("workdir", os.TempDir())
+	TempPath = path.Join(TempDir(), "gobackup", fmt.Sprintf("%d", time.Now().UnixNano()))
 
 	Exist = true
 	Models = []ModelConfig{}
@@ -146,6 +148,10 @@ func GetModelByName(name string) (model *ModelConfig) {
 		}
 	}
 	return
+}
+
+func TempDir() string {
+	return viper.GetString("workdir")
 }
 
 // GetDatabaseByName get database config by name
