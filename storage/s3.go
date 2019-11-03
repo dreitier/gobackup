@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/huacnlee/gobackup/logger"
+	"net/http"
 	"os"
 	"path"
 )
@@ -50,6 +51,9 @@ func (ctx *S3) open() (err error) {
 	if ctx.viper.GetBool("force_path_style") {
 		cfg.S3ForcePathStyle = aws.Bool(true)
 	}
+
+	httpClient := &http.Client{Timeout:0}
+	cfg.HTTPClient = httpClient
 
 	sess := session.Must(session.NewSession(cfg))
 	ctx.client = s3manager.NewUploader(sess)
