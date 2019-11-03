@@ -4,6 +4,7 @@ import (
 	"github.com/huacnlee/gobackup/config"
 	"github.com/huacnlee/gobackup/logger"
 	"github.com/spf13/viper"
+	"os"
 )
 
 // Base encryptor
@@ -42,12 +43,24 @@ func Run(archivePath string, model config.ModelConfig) (encryptPath string, err 
 	logger.Info("------------ Encryptor -------------")
 
 	logger.Info("=> Encrypt | " + model.EncryptWith.Type)
+
 	encryptPath, err = ctx.perform()
 	if err != nil {
+		remove(encryptPath)
 		return
 	}
+
+	remove(archivePath)
+
 	logger.Info("->", encryptPath)
 	logger.Info("------------ Encryptor -------------\n")
 
 	return
+}
+
+func remove(filePath string)  {
+	err := os.Remove(filePath)
+	if err != nil {
+		logger.Warn("removal of archive file failed:", err)
+	}
 }
