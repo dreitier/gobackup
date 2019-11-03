@@ -10,11 +10,11 @@ import (
 
 const (
 	usage = "Easy full stack backup operations on UNIX-like systems"
+	version   = "0.10.0"
 )
 
 var (
 	modelName = ""
-	version   = "master"
 )
 
 func main() {

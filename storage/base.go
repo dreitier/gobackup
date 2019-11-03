@@ -5,6 +5,7 @@ import (
 	"github.com/huacnlee/gobackup/config"
 	"github.com/huacnlee/gobackup/logger"
 	"github.com/spf13/viper"
+	"os"
 	"path/filepath"
 )
 
@@ -65,15 +66,20 @@ func Run(model config.ModelConfig, archivePath string) (err error) {
 		return err
 	}
 	defer ctx.close()
+	defer remove(archivePath)
 
 	err = ctx.upload(newFileKey)
 	if err != nil {
 		return err
 	}
 
-	cycler := Cycler{}
-	cycler.run(model.Name, newFileKey, base.keep, ctx.delete)
-
 	logger.Info("------------- Storage --------------\n")
 	return nil
+}
+
+func remove(filePath string)  {
+	err := os.Remove(filePath)
+	if err != nil {
+		logger.Warn("removal of archive file failed:", err)
+	}
 }
