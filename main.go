@@ -10,7 +10,7 @@ import (
 
 const (
 	usage = "Easy full stack backup operations on UNIX-like systems"
-	version   = "0.10.0"
+	version   = "0.10.1"
 )
 
 var (
