@@ -110,7 +110,7 @@ func (ctx *S3) upload(fileKey string) (err error) {
 		// 10000 parts is the limit for AWS S3. If the resulting number of parts would exceed that limit, increase the
 		// part size as little as needed but as little possible
 		if maxParts > 10000 {
-			partSize = int64(math.Ceil(float64(info.Size() / 10000)))
+			partSize = int64(math.Ceil(float64(info.Size()) / 10000))
 		}
 
 		uploader.Concurrency = 1
