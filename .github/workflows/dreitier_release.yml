@@ -1,4 +1,4 @@
-name: Create custom artifact flavour
+name: Create a new release when tag is pushed in crate-tag-release branch
 
 on:
   push:
