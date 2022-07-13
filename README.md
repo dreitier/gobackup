@@ -1,3 +1,20 @@
+
+# IMPORTANT
+
+This is just a branch for creating custom releases. Do __NOT__ merge this branch back to `main`.
+
+Instead, if you want to create a new custom release:
+
+```bash
+git checkout create-tag-release
+git merge main
+git tag v1.0.66
+git push origin v1.0.66
+```
+
+<hr />
+
+
 <p align="center">
 <img src="https://gobackup.github.io/images/gobackup.svg" width="160" />
 
