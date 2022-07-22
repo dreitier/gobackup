@@ -13,9 +13,9 @@ git merge main
 git tag v1.0.66
 git push origin v1.0.66
 
-# for a tag coming from dreitier repository
-git tag 20220722-dreitier
-git push origin 20220722-dreitier
+# for a tag coming from dreitier repository you have to use the format YYYYMMDD[HHmm] WITHOUT any dashes in it:
+git tag 20220722
+git push origin 20220722
 ```
 
 ## Merge a PR from another user repository
