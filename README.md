@@ -8,8 +8,14 @@ Instead, if you want to create a new custom release:
 ```bash
 git checkout create-tag-release
 git merge main
+
+# for a tag coming from the original repository
 git tag v1.0.66
 git push origin v1.0.66
+
+# for a tag coming from dreitier repository
+git tag 20220722-dreitier
+git push origin 20220722-dreitier
 ```
 
 ## Merge a PR from another user repository
