@@ -12,6 +12,21 @@ git tag v1.0.66
 git push origin v1.0.66
 ```
 
+## Merge a PR from another user repository
+
+```bash
+git remote add ${GH_USERNAME} https://github.com/${user}/gobackup.git
+git fetch ${GH_USERNAME}
+
+git checkout -b ${GH_USERNAME}-${BRANCH_NAME} ${GH_USERNAME}/${REMOTE_BRANCH_OR_MAIN}
+
+# check changes
+git checkout main
+git merge ${GH_USERNAME}-${BRANCH_NAME}
+
+# merge changes from main back to `crate-tag-release` and create tag
+```
+
 <hr />
 
 
